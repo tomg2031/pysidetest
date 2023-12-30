@@ -29,6 +29,8 @@ def button_clicked():
         0
     ].text()  # this will grab contents of text box. Needs [0] to know that it needs the first (asnd only) value in the list.
     print(f"Got super cool text from button: {my_text}")
+    print(f"Got super cool text from button again: {my_text}")
+
 
 
 window.show()
