@@ -28,7 +28,7 @@ def button_clicked():
     my_text = my_line_edit[
         0
     ].text()  # this will grab contents of text box. Needs [0] to know that it needs the first (asnd only) value in the list.
-    print(my_text)
+    print(f'Got text from button: {my_text}')
 
 
 window.show()
