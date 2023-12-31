@@ -27,7 +27,7 @@ class Holderbot:
         # loop through the list of .zip files
         for zip_file in self.zip_files_list:
             if zip_file.endswith(".zip"):
-                # print(zip_file)
+                print(zip_file)
                 # create an instance of the zipfile
                 zf = zipfile.ZipFile(self.zip_files_path + zip_file)
                 # extract the files and skip any duplicates

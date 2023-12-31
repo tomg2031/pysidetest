@@ -13,29 +13,34 @@ window = loader.load("TestWindow.ui", None)
 # add functionality here
 print(type(window))
 
-my_buttons = window.findChildren(
-    QtWidgets.QPushButton
-)  # underneath this QTwidget called window, I want to find children of all type and return those as a list
+executeButton = window.findChild(QtWidgets.QPushButton, "Execute")
+fromButton = window.findChild(QtWidgets.QPushButton, "getFromDirectory")
+toButton = window.findChild(QtWidgets.QPushButton, "getToDirectory")
 
-for i in my_buttons:
-    print(i)
 
-my_line_edit = window.findChildren(
-    QtWidgets.QLineEdit
-)  # now we have a way of grabbing these child elements we can do things to them
+# my_buttons = window.findChildren(
+#     QtWidgets.QPushButton
+# )  # underneath this QTwidget called window, I want to find children of all type and return those as a list
 
-for i in my_line_edit:
-    print(i)
+# for i in my_buttons:
+#     print(i)
 
-my_buttons[0].clicked.connect(
+fromLineEdit = window.findChild(QtWidgets.QLineEdit, "getFromLineEdit")
+toLineEdit = window.findChild(QtWidgets.QLineEdit, "getToLineEdit")
+
+# my_line_edit = window.findChildren(
+#     QtWidgets.QLineEdit
+# )  # now we have a way of grabbing these child elements we can do things to them
+
+executeButton.clicked.connect(
     lambda: button_clicked()
 )  # specifies the element that clicked is under
 
-my_buttons[1].clicked.connect(
+fromButton.clicked.connect(
     lambda: get_from_directory()
 )  # specifies the element that clicked is under
 
-my_buttons[2].clicked.connect(
+toButton.clicked.connect(
     lambda: get_to_directory()
 )  # specifies the element that clicked is under
 
@@ -44,18 +49,18 @@ my_buttons[2].clicked.connect(
 def get_from_directory():
     from_directory = QtWidgets.QFileDialog.getExistingDirectory()  # changed this to be able to select Folder in browser. We will implement this into the testWindow.ui when ready to select file origin, destinatiuon
     # print(from_directory)
-    my_line_edit[0].setText(from_directory)
+    fromLineEdit.setText(from_directory + "/")
 
 
 def get_to_directory():
     to_directory = QtWidgets.QFileDialog.getExistingDirectory()  # changed this to be able to select Folder in browser. We will implement this into the testWindow.ui when ready to select file origin, destinatiuon
     # print(to_directory)
-    my_line_edit[1].setText(to_directory)
+    toLineEdit.setText(to_directory + "/")
 
 
 def button_clicked():
-    from_directory = my_line_edit[0].text()  # this will grab contents of text box. Needs [0] to know that it needs the first (asnd only) value in the list.
-    to_directory = my_line_edit[1].text()
+    from_directory = fromLineEdit.text()  # this will grab contents of text box. Needs [0] to know that it needs the first (asnd only) value in the list.
+    to_directory = toLineEdit.text()
     print(f"from_directory is {from_directory}")
     print(f"to_directory is {to_directory}")
     holder.unzip(from_directory, to_directory)
