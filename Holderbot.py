@@ -18,13 +18,16 @@ class Holderbot:
 
     def unzip(self, from_path, to_path, *args):
         self.zip_files_path = from_path
+        print(self.zip_files_path)
         self.destination_path = to_path
         # create a list of .zip files in the folder
         self.zip_files_list = os.listdir(self.zip_files_path)
+        # print(self.zip_files_list)
 
         # loop through the list of .zip files
         for zip_file in self.zip_files_list:
             if zip_file.endswith(".zip"):
+                # print(zip_file)
                 # create an instance of the zipfile
                 zf = zipfile.ZipFile(self.zip_files_path + zip_file)
                 # extract the files and skip any duplicates
@@ -34,4 +37,4 @@ class Holderbot:
                 # close the file instance
                 zf.close()
 
-                print("Files successfully extracted")
+                # print("Files successfully extracted")

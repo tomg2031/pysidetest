@@ -1,10 +1,11 @@
 import sys
-from PySide6 import QtCore, QtGui, QtWidgets
+from Holderbot import Holderbot
+from PySide6 import QtWidgets
 from PySide6.QtUiTools import QUiLoader
 
 from_directory = ""
 to_directory = ""
-
+holder = Holderbot()  # this instantiates the class, so self does not trigger an error
 loader = QUiLoader()
 app = QtWidgets.QApplication(sys.argv)  # This is a very common line bc of sys
 
@@ -42,22 +43,22 @@ my_buttons[2].clicked.connect(
 # # we have to tell the button what to do when it is clicked
 def get_from_directory():
     from_directory = QtWidgets.QFileDialog.getExistingDirectory()  # changed this to be able to select Folder in browser. We will implement this into the testWindow.ui when ready to select file origin, destinatiuon
-    print(from_directory)
+    # print(from_directory)
     my_line_edit[0].setText(from_directory)
 
 
 def get_to_directory():
     to_directory = QtWidgets.QFileDialog.getExistingDirectory()  # changed this to be able to select Folder in browser. We will implement this into the testWindow.ui when ready to select file origin, destinatiuon
-    print(to_directory)
+    # print(to_directory)
     my_line_edit[1].setText(to_directory)
 
 
 def button_clicked():
-    my_text = my_line_edit[
-        0
-    ].text()  # this will grab contents of text box. Needs [0] to know that it needs the first (asnd only) value in the list.
-    print(f"Got super cool text from button: {my_text}")
-    print(f"Got super cool text from button again: {my_text}")
+    from_directory = my_line_edit[0].text()  # this will grab contents of text box. Needs [0] to know that it needs the first (asnd only) value in the list.
+    to_directory = my_line_edit[1].text()
+    print(f"from_directory is {from_directory}")
+    print(f"to_directory is {to_directory}")
+    holder.unzip(from_directory, to_directory)
 
 
 window.show()
